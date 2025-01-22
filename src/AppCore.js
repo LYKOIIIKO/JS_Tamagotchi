@@ -1,12 +1,14 @@
 let AppCore = function() {
 	let data = {};
 
-	let foodAmount = 5, //amount of food a character has
-		healthAmount = 5, //amount of health a character has
-		sleepAmount = 8; //amount of sleep a character has
+	let foodAmount = 5, //amount of food a pet has
+		healthAmount = 5, //amount of health a pet has
+		sleepAmount = 8; //amount of sleep a pet has
+
+	let timerHealthWork = false;
 
 	this.create = () => {
-		//let name = prompt('Введите имя персонажа');
+		//let name = prompt('Please enter pet name...');
 		data.name = name || 'Pusheen';
 
 		let dateNow = new Date() //date in RU format
@@ -28,60 +30,57 @@ let AppCore = function() {
 
 		this.pickUpFood();
 		this.pickUpSleep();
+		this.giveHealth();
 	}
 
 	this.giveFood = () => {
-		if (data.food < foodAmount) data.food++;
+		if (data.food < foodAmount) data.food = foodAmount;
 		this.get();
-
-		clearInterval(timerFood);
-		this.pickUpFood();
 	}
 
 	this.pickUpFood = () => {
 		timerFood = setInterval(() => {
-			data.food--;;
-			//this.get();
+			if (data.food > 0) data.food--;;
+			this.get();
 			
-			if (data.food == 0) {
-				clearInterval(timerFood);
-
-				this.pickUpHealth();
-			}
+			if (data.food == 0 && timerHealthWork == false) this.pickUpHealth();
 		}, 2000);
 	}
 	
 	this.giveHealth = () => {
-		if (data.health < healthAmount) data.health++;
-		this.get();
+		timerGiveHealth = setInterval(() => {
+			if (data.health < healthAmount && data.food == 5 && data.sleep >= 5) data.health++;
+		}, 1000);
 	}
 
 	this.pickUpHealth = () => {
+		timerHealthWork = true;
+
 		timerHealth = setInterval(() => {
 			data.health--;;
 			this.get();
+
+			if (data.food > 0 || data.sleep > 0) {
+				timerHealthWork = false;
+				clearInterval(timerHealth);
+			} 
 			
-			if (data.health == 0 || data.food > 0) this.gameOver();
-		}, 2000);
+			if (data.health == 0) this.gameOver();
+		}, 5000);
 	}
 	
 	this.giveSleep = () => {
-		if (data.sleep < sleepAmount) data.sleep++;
+		if (data.sleep < sleepAmount) data.sleep = sleepAmount;
 		this.get();
-
-		clearInterval(timerSleep);
-		this.pickUpSleep();
 	}
 
 	this.pickUpSleep = () => {
 		timerSleep = setInterval(() => {
-			if (data.health == 0) this.gameOver();
-
-			data.sleep--;;
+			if (data.sleep > 0) data.sleep--;;
 			this.get();
 
-			if (data.sleep == 0) clearInterval(timerSleep);
-		}, 3000);
+			if (data.sleep == 0 && timerHealthWork == false) this.pickUpHealth();
+		}, 20000);
 	}
 
 	this.get = () => {
@@ -92,6 +91,7 @@ let AppCore = function() {
 		clearInterval(timerFood);
 		clearInterval(timerHealth);
 		clearInterval(timerSleep);
+		clearInterval(timerGiveHealth);
 
 		alert('Game Over!');
 	}

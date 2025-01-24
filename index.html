@@ -3,12 +3,66 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/src/css/style.css">
 	<title>Document</title>
 </head>
 <body>
+
+	<div id="root">
+		<div class="app">
+			<div class="container">
+				<div class="app__top">
+					<button class="app__top_btn"></button>
+					<span class="app__top_btnName">on/off</span>
+				</div>
+				<div class="app__screen">
+					<div class="app__screen_time">
+						&#8203;
+						<span class="app__screen_time_count">00,000</span>
+					</div>
+					<div class="app__screen_view">
+						<div class="app__screen_gifBorn active"></div>
+						<div class="app__screen_gifDeath "></div>
+						<div class="app__screen_gifEat "></div>
+						<div class="app__screen_gifHealthLess "></div>
+						<div class="app__screen_gifNeedEat "></div>
+						<div class="app__screen_gifNeedSleep "></div>
+						<div class="app__screen_gifPlay "></div>
+						<div class="app__screen_gifSleep "></div>
+						<div class="app__screen_gifWalk "></div>
+					</div>
+					<div class="app__screen_status">
+						&#8203;
+						<div class="app__screen_container">
+							<span class="app__screen_life">life 3/5</span>
+							<span class="app__screen_food">food 3/5</span>
+							<span class="app__screen_sleep">sleep 3/8</span>
+						</div>
+						
+					</div>
+				</div>
+				<div class="app__bottom">
+					<ul class="app__bottom_list">
+						<li class="app__bottom_item">
+							<span class="app__bottom_btnName">eat</span>
+							<button class="app__bottom_btn app__bottom_btn_eat"></button>
+						</li>
+						<li class="app__bottom_item">
+							<span class="app__bottom_btnName">sleep</span>
+							<button class="app__bottom_btn app__bottom_btn_sleep"></button>
+						</li>
+						<li class="app__bottom_item">
+							<span class="app__bottom_btnName">play</span>
+							<button class="app__bottom_btn app__bottom_btn_play"></button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	
-<script src="/src/AppCore.js"></script>	
+<script src="/src/AppCore.js"></script>
 <script src="/src/AppUI.js"></script>
 <script src="/src/index.js"></script>
 

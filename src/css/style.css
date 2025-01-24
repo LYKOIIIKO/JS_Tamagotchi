@@ -1,0 +1,236 @@
+/*
+font-family: "Lilita One", serif;
+font-weight: 400;
+font-style: normal; 
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html, body, #root, .app {
+    height: 100%;
+} */
+
+span, div {
+    font-family: "Lilita One", serif;
+	font-weight: 400;
+	font-style: normal; 
+	font-size: 26px;
+}
+
+body {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+}
+
+.app {
+	background-image: url(/assets/images/bg_app.png);
+	padding: 50px 0;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+	position: relative;
+	background-image: url(/assets/images/bg__container.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 500px;
+	height: 510px;
+	margin: 0 auto;
+}
+
+.app__top {
+	position: absolute;
+	top: 10%;
+	left: 45%;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: center;
+	align-items: center;
+}
+
+.app__top_btn {
+	background-image: url(/assets/images/ico_bottom_btn.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+}
+
+.app__top_btnName {
+	font-size: 20px;
+}
+
+.app__top_btn:hover {
+	background-image: url(/assets/images/ico_bottom_btn_push.png);
+}
+
+.app__screen {
+	position: absolute;
+	top: 22%;
+	left: 25%;
+	background-image: url(/assets/images/bg_screen.png);
+	background-repeat: no-repeat;
+	background-color: rgba(255, 255, 255, 0.514);
+
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+}
+
+.app__screen_time {
+	text-align: right;
+}
+
+.app__screen_time_count {
+	font-size: 20px;
+}
+
+.app__screen_view {
+	height: 200px;
+}
+
+.app__screen_gifBorn,
+.app__screen_gifDeath,
+.app__screen_gifEat,
+.app__screen_gifHealthLess,
+.app__screen_gifNeedEat,
+.app__screen_gifNeedSleep,
+.app__screen_gifPlay,
+.app__screen_gifSleep,
+.app__screen_gifWalk {
+	display: none;
+	
+	background-repeat: no-repeat;
+	background-size: 50%;
+	background-position: center;
+	height: 100%;
+}
+
+.app__screen_gifBorn.active,
+.app__screen_gifDeath.active,
+.app__screen_gifEat.active,
+.app__screen_gifHealthLess.active,
+.app__screen_gifNeedEat.active,
+.app__screen_gifNeedSleep.active,
+.app__screen_gifPlay.active,
+.app__screen_gifSleep.active,
+.app__screen_gifWalk.active{
+	display: block;
+}
+
+.app__screen_gifBorn {
+	background-image: url(/assets/images/pet_born.gif);
+}
+
+.app__screen_gifDeath {
+	background-image: url(/assets/images/pet_death.gif);
+}
+
+.app__screen_gifEat {
+	background-image: url(/assets/images/pet_eat.gif);
+}
+
+.app__screen_gifHealthLess {
+	background-image: url(/assets/images/pet_healthLess2.gif);
+}
+
+.app__screen_gifNeedEat {
+	background-image: url(/assets/images/pet_needEat.gif);
+}
+
+.app__screen_gifNeedSleep {
+	background-image: url(/assets/images/pet_needSleep.gif);
+}
+
+.app__screen_gifPlay {
+	background-image: url(/assets/images/pet_play.gif);
+}
+
+.app__screen_gifSleep {
+	background-image: url(/assets/images/pet_sleep.gif);
+}
+
+.app__screen_gifWalk{
+	background-image: url(/assets/images/pet_walk.gif);
+}
+
+.app__screen_status {
+	height: 24px;
+	display: flex;
+}
+
+.app__screen_container {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.app__screen_life,
+.app__screen_food,
+.app__screen_sleep {
+	position: absolute;
+	font-size: 18px;
+}
+
+.app__screen_life {
+	left: 5%;
+}
+
+.app__screen_food {
+	left: 35%;
+}
+
+.app__screen_sleep {
+	left: 68%;
+}
+
+.app__bottom {
+	position: absolute;
+	top: 69%;
+	left: 31%;
+}
+
+.app__bottom_list {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+
+	padding: 30px 0;
+}
+
+.app__bottom_item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.app__bottom_btn {
+	background-image: url(/assets/images/ico_bottom_btn.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 40px;
+	height: 40px;
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+}
+
+.app__bottom_btn:hover{
+	background-image: url(/assets/images/ico_bottom_btn_push.png);
+}

@@ -16,6 +16,6 @@
 //СРОК 31.01.2025!!!!!!!!!!!!!!!!!!!!
 
 window.addEventListener('load', () => {
-	let ui = new AppUI();
+	ui = new AppUI();
 	core = new AppCore();
 })

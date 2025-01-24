@@ -113,8 +113,6 @@ let AppCore = function() {
 			}
 
 			if (data.hours1 == 10) clearInterval(timerLive);
-
-			console.log(data.timer);
 		}, 1000);
 	}
 

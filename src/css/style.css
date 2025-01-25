@@ -49,7 +49,7 @@ ul {
 .app__top {
 	position: absolute;
 	top: 10%;
-	left: 45%;
+	left: 44%;
 	display: flex;
 	flex-direction: column-reverse;
 	justify-content: center;
@@ -203,7 +203,7 @@ ul {
 .app__bottom {
 	position: absolute;
 	top: 69%;
-	left: 31%;
+	left: 30%;
 }
 
 .app__bottom_list {

@@ -1,5 +1,7 @@
 let AppUI = function() {
 	AppCore.apply(this, arguments);
+
+	let elems = null;
 	
 	this.createUI = () => {
 		let root = document.querySelector('#root');
@@ -24,8 +26,12 @@ let AppUI = function() {
 			let appScreenTime = document.createElement('div');
 			appScreenTime.classList.add('app__screen_time');
 			appScreenTime.innerHTML = '&#8203;';
-				let appScreenCount = document.createElement('span'); 
-				appScreenCount.classList.add('app__screen_time_count');
+				let appScreenTimeContainer = document.createElement('div');
+				appScreenTimeContainer.classList.add('app__screen_time_container');
+					let appScreenName = document.createElement('span'); 
+					appScreenName.classList.add('app__screen_name');
+					let appScreenCount = document.createElement('span'); 
+					appScreenCount.classList.add('app__screen_time_count');
 			let appScreenView = document.createElement('div');
 			appScreenView.classList.add('app__screen_view');
 				let appScreenGifBorn = document.createElement('div');
@@ -102,7 +108,9 @@ let AppUI = function() {
 
 		appScreenView.append(appScreenGifBorn, appScreenGifDeath, appScreenGifEat, appScreenGifHealthLess, appScreenGifNeedEat, appScreenGifNeedSleep, appScreenGifPlay, appScreenGifSleep, appScreenGifWalk);
 
-		appScreenTime.append(appScreenCount);
+		appScreenTimeContainer.append(appScreenName, appScreenCount)
+		appScreenTime.append(appScreenTimeContainer);
+
 
 		appScreen.append(appScreenTime, appScreenView, appScreenStatus);
 
@@ -116,11 +124,26 @@ let AppUI = function() {
 
 		root.append(appElem);
 		console.log(root);
+
+		return {
+			btnOn: appTopBtn,
+			btnEat: appBtnEat,
+			btnSleep: appBtnSleep,
+			btnPlay: appBtnPlay,
+			petName: appScreenName,
+			liveCount: appScreenCount,
+			screen: appScreenView,
+			statusLife: appScreenLife,
+			statusFood: appScreenFood,
+			statusSleep: appScreenSleep
+		}
 	}
 
 	let on = () => {}
 
 	let off = () => {}
 
-	let init = () => {}
+	let init = () => {
+		elems = this.createUI();
+	}
 }

@@ -9,9 +9,9 @@ font-style: normal;
     box-sizing: border-box;
 }
 
-/* html, body, #root, .app {
+html, body, #root, .app {
     height: 100%;
-} */
+}
 
 span, div {
     font-family: "Lilita One", serif;
@@ -93,11 +93,19 @@ ul {
 }
 
 .app__screen_time {
-	text-align: right;
+	display: flex;
 }
 
+.app__screen_time_container {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.app__screen_name,
 .app__screen_time_count {
 	font-size: 20px;
+	line-height: 20px;
 }
 
 .app__screen_view {

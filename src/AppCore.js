@@ -8,9 +8,14 @@ let AppCore = function() {
 	let timerHealthWork = false;
 
 	this.create = () => {
-		//let name = prompt('Please enter pet name...');
-		data.name = name || 'Pusheen';
-
+		let name = prompt('Please enter pet name...');
+		
+		if (name.length > 10) {
+			name = prompt('Max name length 10 symbols. Please enter pet name');
+			data.name = name || 'Pusheen';
+		}
+		else data.name = name || 'Pusheen';
+			
 		let dateNow = new Date() //date in RU format
 		let opt = { 
 			year: 'numeric',
@@ -38,7 +43,8 @@ let AppCore = function() {
 		this.pickUpFood();
 		this.pickUpSleep();
 		this.giveHealth();
-		this.timerLive();
+
+		return data;
 	}
 
 	this.giveFood = () => {
@@ -91,29 +97,36 @@ let AppCore = function() {
 		}, 20000);
 	}
 
-	this.timerLive = () => {
-		
-		timerLive = setInterval(() => {
-			data.timer = data.hours1 + '' + data.hours2 + ':' + data.minutes1 + '' + data.minutes2;
+	this.timerLive = (elem) => {
+		let hours1 = 0,
+			hours2 = 0,
+			minutes1 = 0,
+			minutes2 = 1,
+			timer;
 
-			if(data.minutes2 < 10) data.minutes2++;
-			if (data.minutes2 == 10) {
-				data.minutes2 = 0;
-				data.minutes1++;
+		timerCount = setInterval(() => {
+			timer = hours1 + '' + hours2 + ':' + minutes1 + '' + minutes2;
+
+			if(minutes2 < 10) minutes2++;
+			if (minutes2 == 10) {
+				minutes2 = 0;
+				minutes1++;
 			}
 			
-			if(data.minutes1 == 6) {
-				data.minutes1 = 0;
-				data.hours2++;
+			if(minutes1 == 6) {
+				minutes1 = 0;
+				hours2++;
 			}
 
-			if (data.hours2 == 10) {
-				data.hours2 = 0;
-				data.hours1++;
+			if (hours2 == 10) {
+				hours2 = 0;
+				hours1++;
 			}
 
-			if (data.hours1 == 10) clearInterval(timerLive);
-		}, 1000);
+			if (hours1 == 10) clearInterval(timerLive);
+			
+			elem.innerHTML = timer;
+		}, 1000, elem);
 	}
 
 	this.get = () => {
@@ -125,6 +138,7 @@ let AppCore = function() {
 		clearInterval(timerHealth);
 		clearInterval(timerSleep);
 		clearInterval(timerGiveHealth);
+		clearInterval(timerCount);
 
 		alert('Game Over!');
 	}

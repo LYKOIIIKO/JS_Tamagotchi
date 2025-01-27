@@ -3,7 +3,7 @@ let AppUI = function() {
 
 	let elems = null;
 	
-	this.createUI = () => {
+	let createUI = () => {
 		let root = document.querySelector('#root');
 
 		let appElem = document.createElement('div');
@@ -32,6 +32,8 @@ let AppUI = function() {
 					appScreenName.classList.add('app__screen_name');
 					let appScreenCount = document.createElement('span'); 
 					appScreenCount.classList.add('app__screen_time_count');
+					
+					
 			let appScreenView = document.createElement('div');
 			appScreenView.classList.add('app__screen_view');
 				let appScreenGifBorn = document.createElement('div');
@@ -122,16 +124,14 @@ let AppUI = function() {
 
 		appElem.append(appContainer);
 
-		root.append(appElem);
-		console.log(root);
-
 		return {
+			main: appElem,
 			btnOn: appTopBtn,
 			btnEat: appBtnEat,
 			btnSleep: appBtnSleep,
 			btnPlay: appBtnPlay,
 			petName: appScreenName,
-			liveCount: appScreenCount,
+			timer: appScreenCount,
 			screen: appScreenView,
 			statusLife: appScreenLife,
 			statusFood: appScreenFood,
@@ -139,11 +139,26 @@ let AppUI = function() {
 		}
 	}
 
-	let on = () => {}
+	let onEnable = () => {
+		let data = this.create();
+		
+		elems.petName.innerHTML = data.name;
+		elems.timer.innerHTML = '00:00';
+
+		this.timerLive(elems.timer);
+
+		
+		
+	}
 
 	let off = () => {}
 
 	let init = () => {
-		elems = this.createUI();
+		elems = createUI();
+		root.append(elems.main);
+
+		elems.btnOn.addEventListener('click', onEnable);
 	}
+
+	init();
 }

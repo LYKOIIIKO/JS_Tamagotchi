@@ -5,7 +5,8 @@ let AppCore = function() {
 		healthAmount = 5, //amount of health a pet has
 		sleepAmount = 8; //amount of sleep a pet has
 
-	let timerHealthWork = false;
+	let timerHealthWork = false,
+		timerGiveHealthWork = false;	
 
 	this.create = () => {
 		let name = prompt('Please enter pet name...');
@@ -42,9 +43,9 @@ let AppCore = function() {
 		data.foodMax = foodAmount;
 		data.sleepMax = sleepAmount;
 		data.healthMax = healthAmount;
-		this.get();
-
 		
+		data.timerHealthWork = timerHealthWork;
+		data.timerGiveHealthWork = timerGiveHealthWork;
 
 		return data;
 	}
@@ -63,12 +64,20 @@ let AppCore = function() {
 			food.innerHTML = `food ${data.food}/${foodAmount}`;
 			
 			if (data.food == 0 && timerHealthWork == false) this.pickUpHealth(life);
-		}, 3000, food, life);
+		}, 5000, food, life);
 	}
 	
 	this.giveHealth = (life) => {
 		timerGiveHealth = setInterval(() => {
-			if (data.health < healthAmount && data.food == 5 && data.sleep >= 5) data.health++;
+			if (timerHealthWork && data.health < healthAmount && data.food >= 4 && data.sleep >= 5) {
+				setTimeout(() => {
+					data.health++;
+				}, 5000)
+				timerGiveHealthWork = true;
+			}
+			else timerGiveHealthWork = false;
+
+			data.timerGiveHealthWork = timerGiveHealthWork;
 
 			life.innerHTML = `life ${data.health}/${healthAmount}`;
 		}, 1000, life);
@@ -76,6 +85,7 @@ let AppCore = function() {
 
 	this.pickUpHealth = (life) => {
 		timerHealthWork = true;
+		data.timerHealthWork = timerHealthWork;
 
 		timerHealth = setInterval(() => {
 			data.health--;;
@@ -84,11 +94,12 @@ let AppCore = function() {
 
 			if (data.food > 0 || data.sleep > 0) {
 				timerHealthWork = false;
+				data.timerHealthWork = timerHealthWork;
 				clearInterval(timerHealth);
 			} 
 			
 			if (data.health == 0) this.gameOver();
-		}, 1000, life);
+		}, 10000, life);
 	}
 	
 	this.giveSleep = (sleep) => {
@@ -141,7 +152,7 @@ let AppCore = function() {
 	}
 
 	this.get = () => {
-		return console.log(data);
+		return data;
 	}
 
 	this.stop = () => {

@@ -2,7 +2,10 @@ let AppUI = function() {
 	AppCore.apply(this, arguments);
 
 	let elems = null,
-		check = false;
+		check = false,
+		dataTmp;
+
+	let timerActionWork = false;
 	
 	let createUI = () => {
 		let root = document.querySelector('#root');
@@ -159,13 +162,18 @@ let AppUI = function() {
 		elems.statusFood.innerHTML = `food ${data.food}/${data.foodMax}`;
 		elems.statusSleep.innerHTML = `sleep ${data.sleep}/${data.sleepMax}`;
 
-		let born = elems.screen.querySelector('.app__screen_gifBorn');
-		born.classList.add('active');
+		bornActive();
+
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
+		
 
 		this.timerLive(elems.timer);
 		this.pickUpFood(elems.statusFood, elems.statusLife);
 		this.pickUpSleep(elems.statusSleep, elems.statusLife);
 		this.giveHealth(elems.statusLife);
+
+		getData();
 
 		elems.btnEat.addEventListener('click', onEat);
 		elems.btnSleep.addEventListener('click', onSleep);
@@ -174,26 +182,22 @@ let AppUI = function() {
 
 	let onEat = () => {
 		this.giveFood(elems.statusFood);
+		eatingActive();
 	}
 
 	let onSleep = () => {
 		this.giveSleep(elems.statusSleep);
+		sleepingActive();
 	}
 
 	let onPlay = () => {
-		let born = elems.screen.querySelector('.app__screen_gifBorn');
-		born.classList.remove('active');
+		clearActive();
 
 		let play = elems.screen.querySelector('.app__screen_gifPlay');
 		play.classList.add('active');
 
-		setTimeout(() => {
-			play.classList.remove('active');
-			born = elems.screen.querySelector('.app__screen_gifBorn');
-			born.classList.add('active');
-		}, 5000);
-
-		
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
 	}
 
 	let clear = () => {
@@ -203,8 +207,7 @@ let AppUI = function() {
 		elems.statusFood.innerHTML = '';
 		elems.statusSleep.innerHTML = '';
 
-		let list = elems.screen.querySelector('.active');
-		list.classList.remove('active');
+		clearActive();
 
 		setTimeout(() => {
 			check = false;
@@ -212,13 +215,111 @@ let AppUI = function() {
 		
 	}
 
+	let bornActive = () => {
+		let born = elems.screen.querySelector('.app__screen_gifBorn');
+		born.classList.add('active');
+	}
+
+	let clearActive = () => {
+		let active = elems.screen.querySelector('.active');
+		active.classList.remove('active');
+	}
+
+	let walkActive = () => {
+		let walk = elems.screen.querySelector('.app__screen_gifWalk');
+		walk.classList.add('active');
+	}
+
+	let needEatActive = () => {
+		clearActive();
+
+		let needEat = elems.screen.querySelector('.app__screen_gifNeedEat');
+		needEat.classList.add('active');
+	}
+
+	let eatingActive = () => {
+		clearActive();
+
+		let eat = elems.screen.querySelector('.app__screen_gifEat');
+		eat.classList.add('active');
+
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
+	}
+
+	let needSleepActive = () => {
+		clearActive();
+
+		let needSleep = elems.screen.querySelector('.app__screen_gifNeedSleep');
+		needSleep.classList.add('active');
+	}
+
+	let sleepingActive = () => {
+		clearActive();
+
+		let sleep = elems.screen.querySelector('.app__screen_gifSleep');
+		sleep.classList.add('active');
+
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
+	}
+
+	let healthLessActive = () => {
+		clearActive();
+
+		let healthLess = elems.screen.querySelector('.app__screen_gifHealthLess');
+		healthLess.classList.add('active');
+
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
+		
+	}
+
+	let getHealthActive = () => {
+		clearActive();
+
+		let giveHealth = elems.screen.querySelector('.app__screen_gifPlay');
+		giveHealth.classList.add('active');
+
+		if(timerActionWork) clearTimeout(timerClear);
+		timerAction();
+	}
+
+	let deathActive = () => {}
+
+	let timerAction = () => {
+		timerActionWork = true;
+
+		timerClear = setTimeout(() => {
+			clearActive();
+			walkActive();
+
+			timerActionWork = false;
+		}, 5000);
+	}
+
+	let getData = () => {
+		timerGet = setInterval(() => {
+			dataTmp = this.get();
+
+			if (dataTmp.food == 0) needEatActive();
+
+			if (dataTmp.food > 0 && dataTmp.sleep == 0) needSleepActive();
+
+			if (dataTmp.timerHealthWork) healthLessActive();
+
+			if (dataTmp.timerGiveHealthWork) getHealthActive();
+
+			console.log(dataTmp.timerHealthWork)
+			console.log(dataTmp.timerGiveHealthWork)
+		}, 5000);
+	}
+
 	let init = () => {
 		elems = createUI();
 		root.append(elems.main);
 
 		elems.btnOn.addEventListener('click', onEnable);
-		
-		
 	}
 
 	init();

@@ -11,7 +11,7 @@ let AppCore = function() {
 		let name = prompt('Please enter pet name...');
 		
 		if (name.length > 10) {
-			name = prompt('Max name length 10 symbols. Please enter pet name');
+			name = prompt('Max name length 10 symbols. Please enter pet name...');
 			data.name = name || 'Pusheen';
 		}
 		else data.name = name || 'Pusheen';
@@ -38,41 +38,49 @@ let AppCore = function() {
 		data.health = healthAmount;
 
 		data.sleep = sleepAmount;
+
+		data.foodMax = foodAmount;
+		data.sleepMax = sleepAmount;
+		data.healthMax = healthAmount;
 		this.get();
 
-		this.pickUpFood();
-		this.pickUpSleep();
-		this.giveHealth();
+		
 
 		return data;
 	}
 
-	this.giveFood = () => {
+	this.giveFood = (food) => {
 		if (data.food < foodAmount) data.food = foodAmount;
 		this.get();
+
+		food.innerHTML = `food ${data.food}/${foodAmount}`;
 	}
 
-	this.pickUpFood = () => {
+	this.pickUpFood = (food, life) => {
 		timerFood = setInterval(() => {
 			if (data.food > 0) data.food--;;
 			this.get();
+			food.innerHTML = `food ${data.food}/${foodAmount}`;
 			
-			if (data.food == 0 && timerHealthWork == false) this.pickUpHealth();
-		}, 20000);
+			if (data.food == 0 && timerHealthWork == false) this.pickUpHealth(life);
+		}, 3000, food, life);
 	}
 	
-	this.giveHealth = () => {
+	this.giveHealth = (life) => {
 		timerGiveHealth = setInterval(() => {
 			if (data.health < healthAmount && data.food == 5 && data.sleep >= 5) data.health++;
-		}, 1000);
+
+			life.innerHTML = `life ${data.health}/${healthAmount}`;
+		}, 1000, life);
 	}
 
-	this.pickUpHealth = () => {
+	this.pickUpHealth = (life) => {
 		timerHealthWork = true;
 
 		timerHealth = setInterval(() => {
 			data.health--;;
-			this.get();
+
+			life.innerHTML = `life ${data.health}/${healthAmount}`;
 
 			if (data.food > 0 || data.sleep > 0) {
 				timerHealthWork = false;
@@ -80,21 +88,24 @@ let AppCore = function() {
 			} 
 			
 			if (data.health == 0) this.gameOver();
-		}, 50000);
+		}, 1000, life);
 	}
 	
-	this.giveSleep = () => {
+	this.giveSleep = (sleep) => {
 		if (data.sleep < sleepAmount) data.sleep = sleepAmount;
 		this.get();
+
+		sleep.innerHTML = `sleep ${data.sleep}/${sleepAmount}`;
 	}
 
-	this.pickUpSleep = () => {
+	this.pickUpSleep = (sleep, life) => {
 		timerSleep = setInterval(() => {
 			if (data.sleep > 0) data.sleep--;;
 			this.get();
+			sleep.innerHTML = `sleep ${data.sleep}/${sleepAmount}`;
 
-			if (data.sleep == 0 && timerHealthWork == false) this.pickUpHealth();
-		}, 20000);
+			if (data.sleep == 0 && timerHealthWork == false) this.pickUpHealth(life);
+		}, 5000, sleep, life);
 	}
 
 	this.timerLive = (elem) => {
@@ -131,6 +142,18 @@ let AppCore = function() {
 
 	this.get = () => {
 		return console.log(data);
+	}
+
+	this.stop = () => {
+		clearInterval(timerFood);
+		if(timerHealthWork) clearInterval(timerHealth);
+		clearInterval(timerSleep);
+		clearInterval(timerGiveHealth);
+		clearInterval(timerCount);
+
+		data = {};
+		timerHealthWork = false;
+		alert('Stop game');
 	}
 
 	this.gameOver = () => {

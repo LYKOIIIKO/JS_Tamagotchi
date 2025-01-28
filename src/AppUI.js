@@ -1,7 +1,8 @@
 let AppUI = function() {
 	AppCore.apply(this, arguments);
 
-	let elems = null;
+	let elems = null,
+		check = false;
 	
 	let createUI = () => {
 		let root = document.querySelector('#root');
@@ -140,24 +141,84 @@ let AppUI = function() {
 	}
 
 	let onEnable = () => {
+		
+		if (check) {
+			this.stop();
+			clear();
+		}
+
+		if(check) return;
+
+		check = true;
+		
 		let data = this.create();
 		
 		elems.petName.innerHTML = data.name;
 		elems.timer.innerHTML = '00:00';
+		elems.statusLife.innerHTML = `life ${data.health}/${data.healthMax}`;
+		elems.statusFood.innerHTML = `food ${data.food}/${data.foodMax}`;
+		elems.statusSleep.innerHTML = `sleep ${data.sleep}/${data.sleepMax}`;
+
+		let born = elems.screen.querySelector('.app__screen_gifBorn');
+		born.classList.add('active');
 
 		this.timerLive(elems.timer);
+		this.pickUpFood(elems.statusFood, elems.statusLife);
+		this.pickUpSleep(elems.statusSleep, elems.statusLife);
+		this.giveHealth(elems.statusLife);
 
-		
+		elems.btnEat.addEventListener('click', onEat);
+		elems.btnSleep.addEventListener('click', onSleep);
+		elems.btnPlay.addEventListener('click', onPlay);
+	}
+
+	let onEat = () => {
+		this.giveFood(elems.statusFood);
+	}
+
+	let onSleep = () => {
+		this.giveSleep(elems.statusSleep);
+	}
+
+	let onPlay = () => {
+		let born = elems.screen.querySelector('.app__screen_gifBorn');
+		born.classList.remove('active');
+
+		let play = elems.screen.querySelector('.app__screen_gifPlay');
+		play.classList.add('active');
+
+		setTimeout(() => {
+			play.classList.remove('active');
+			born = elems.screen.querySelector('.app__screen_gifBorn');
+			born.classList.add('active');
+		}, 5000);
+
 		
 	}
 
-	let off = () => {}
+	let clear = () => {
+		elems.petName.innerHTML = '';
+		elems.timer.innerHTML = '';
+		elems.statusLife.innerHTML = '';
+		elems.statusFood.innerHTML = '';
+		elems.statusSleep.innerHTML = '';
+
+		let list = elems.screen.querySelector('.active');
+		list.classList.remove('active');
+
+		setTimeout(() => {
+			check = false;
+		}, 1);
+		
+	}
 
 	let init = () => {
 		elems = createUI();
 		root.append(elems.main);
 
 		elems.btnOn.addEventListener('click', onEnable);
+		
+		
 	}
 
 	init();

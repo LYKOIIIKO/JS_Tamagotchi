@@ -28,6 +28,8 @@ body {
 
 .app {
 	background-image: url(/assets/images/bg_app.png);
+	background-repeat: no-repeat;
+	background-size: cover;
 	padding: 50px 0;
 }
 

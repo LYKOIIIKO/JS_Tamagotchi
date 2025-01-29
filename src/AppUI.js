@@ -6,8 +6,10 @@ let AppUI = function() {
 		dataTmp;
 
 	let timerActionWork = false;
+
+	let gameOver = false;
 	
-	let createUI = () => {
+	let createUI = () => { //build HTML structure
 		let root = document.querySelector('#root');
 
 		let appElem = document.createElement('div');
@@ -143,9 +145,8 @@ let AppUI = function() {
 		}
 	}
 
-	let onEnable = () => {
-		
-		if (check) {
+	let onEnable = () => { //when press button on/off
+		if (check) { //stop game if it works
 			this.stop();
 			clear();
 		}
@@ -153,6 +154,7 @@ let AppUI = function() {
 		if(check) return;
 
 		check = true;
+		gameOver = false;
 		
 		let data = this.create();
 		
@@ -180,17 +182,23 @@ let AppUI = function() {
 		elems.btnPlay.addEventListener('click', onPlay);
 	}
 
-	let onEat = () => {
+	let onEat = () => { //when press button eat
+		if (gameOver) return;
+		
 		this.giveFood(elems.statusFood);
 		eatingActive();
 	}
 
-	let onSleep = () => {
+	let onSleep = () => { //when press button sleep
+		if (gameOver) return;
+
 		this.giveSleep(elems.statusSleep);
 		sleepingActive();
 	}
 
-	let onPlay = () => {
+	let onPlay = () => { //when press button play
+		if (gameOver) return;
+
 		clearActive();
 
 		let play = elems.screen.querySelector('.app__screen_gifPlay');
@@ -200,7 +208,7 @@ let AppUI = function() {
 		timerAction();
 	}
 
-	let clear = () => {
+	let clear = () => { //clear screen when game stop
 		elems.petName.innerHTML = '';
 		elems.timer.innerHTML = '';
 		elems.statusLife.innerHTML = '';
@@ -208,11 +216,11 @@ let AppUI = function() {
 		elems.statusSleep.innerHTML = '';
 
 		clearActive();
+		clearTimeout(timerClear);
 
-		setTimeout(() => {
+		setTimeout(() => { //lifehack, without this nothing is work
 			check = false;
 		}, 1);
-		
 	}
 
 	let bornActive = () => {
@@ -220,7 +228,7 @@ let AppUI = function() {
 		born.classList.add('active');
 	}
 
-	let clearActive = () => {
+	let clearActive = () => { // remove active class of all elements
 		let active = elems.screen.querySelector('.active');
 		active.classList.remove('active');
 	}
@@ -272,7 +280,6 @@ let AppUI = function() {
 
 		if(timerActionWork) clearTimeout(timerClear);
 		timerAction();
-		
 	}
 
 	let getHealthActive = () => {
@@ -285,9 +292,14 @@ let AppUI = function() {
 		timerAction();
 	}
 
-	let deathActive = () => {}
+	let deathActive = () => {
+		clearActive();
 
-	let timerAction = () => {
+		let death = elems.screen.querySelector('.app__screen_gifDeath');
+		death.classList.add('active');
+	}
+
+	let timerAction = () => { //timer to set default animation
 		timerActionWork = true;
 
 		timerClear = setTimeout(() => {
@@ -295,24 +307,24 @@ let AppUI = function() {
 			walkActive();
 
 			timerActionWork = false;
-		}, 5000);
+		}, 3000);
 	}
 
-	let getData = () => {
+	let getData = () => { //working all time. Interviews data to get information of Pet parameters
 		timerGet = setInterval(() => {
 			dataTmp = this.get();
+
+			//if (dataTmp.timerHealthWork) healthLessActive();
+			// if (dataTmp.timerGiveHealthWork) getHealthActive();
 
 			if (dataTmp.food == 0) needEatActive();
 
 			if (dataTmp.food > 0 && dataTmp.sleep == 0) needSleepActive();
 
-			if (dataTmp.timerHealthWork) healthLessActive();
+			if (dataTmp.health == 0) deathActive();
 
-			if (dataTmp.timerGiveHealthWork) getHealthActive();
-
-			console.log(dataTmp.timerHealthWork)
-			console.log(dataTmp.timerGiveHealthWork)
-		}, 5000);
+			if (dataTmp.gameOver) gameOver = true;
+		}, 1000);
 	}
 
 	let init = () => {

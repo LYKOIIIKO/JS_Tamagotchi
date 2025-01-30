@@ -1,0 +1,148 @@
+@media (max-width: 1281px) {
+	.container {
+		scale: 0.9;
+	}
+}
+
+@media (max-width: 1025px) {
+	.container {
+		scale: 0.8;
+	}
+}
+
+@media (max-width: 641px) {
+	.container {
+		scale: 0.7;
+	}
+}
+
+@media (max-width: 421px) {
+	.app {
+		padding: 0;
+		padding-top: 40px;
+	}
+
+	.container {
+		scale: 1;
+
+		width: 350px;
+    	height: 355px;
+	}
+
+	.app__top {
+		scale: 0.75;
+		top: 7%;
+    	left: 42%;
+	}
+
+	.app__screen {
+		width: 180px;
+    	height: 180px;
+	}
+
+	.app__screen_view {
+		height: 100%;
+	}
+
+	.app__screen_name,
+	.app__screen_time_count {
+		scale: 0.8;
+		text-wrap: nowrap;
+	}
+
+	.app__screen_life,
+	.app__screen_food,
+	.app__screen_sleep {
+		scale: 0.7;
+		text-wrap: nowrap;
+	}
+
+	.app__screen_life {
+		left: 1%;
+	}
+
+	.app__screen_food {
+		left: 30%;
+	}
+
+	.app__screen_sleep {
+		left: 62%;
+	}
+
+	.app__bottom {
+		top: 74%;
+    	left: 22%;
+	}
+
+	.app__bottom_list {
+		scale: 0.8;
+		padding: 0;
+	}
+}
+
+@media (max-width: 321px) {
+	.container {
+		width: 300px;
+    	height: 305px;
+	}
+
+	.app__top {
+		scale: 0.65;
+        top: 5%;
+        left: 41%;
+	}
+
+	.app__screen {
+		width: 152px;
+    	height: 152px;
+	}
+
+	.app__screen_time_container {
+		position: relative;
+		justify-content: inherit;
+	}
+
+	.app__screen_name,
+	.app__screen_time_count {
+		position: absolute;
+		scale: 0.7;
+		text-wrap: nowrap;
+	}
+
+	.app__screen_name {
+		left: 1%;
+	}
+
+	.app__screen_time_count {
+		left: 67%;
+	}
+
+	.app__screen_life,
+	.app__screen_food,
+	.app__screen_sleep {
+		scale: 0.65;
+		text-wrap: nowrap;
+	}
+
+	.app__screen_life {
+		left: -4%;
+	}
+
+	.app__screen_food {
+		left: 24%;
+	}
+
+	.app__screen_sleep {
+		left: 57%;
+	}
+
+	.app__bottom {
+		top: 73%;
+    	left: 17%;
+	}
+
+	.app__bottom_list {
+		scale: 0.7;
+		padding: 0;
+	}
+}

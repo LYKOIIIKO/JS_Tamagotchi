@@ -244,3 +244,11 @@ ul {
 .app__bottom_btn:hover{
 	background-image: url(/assets/images/ico_bottom_btn_push.png);
 }
+
+
+.alert_fastMode {
+	/* display: none; */
+	position: absolute;
+	top: 0;
+	left: 0;
+}

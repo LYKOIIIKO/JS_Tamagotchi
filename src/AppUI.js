@@ -101,7 +101,25 @@ let AppUI = function() {
 					let appBtnPlay = document.createElement('button');
 					appBtnPlay.classList.add('app__bottom_btn');
 					appBtnPlay.classList.add('app__bottom_btn_play');
+
+			let appFastMode = document.createElement('div');
+			appFastMode.classList.add('alert_fastMode');
+				let appFastModeText = document.createElement('div');
+				appFastModeText.classList.add('alert_fastMode_text');
+				appFastModeText.innerHTML = '';
+
+				let appFastModeBtns = document.createElement('div');
+				appFastModeBtns.classList.add('alert_fastMode_btns');
+					let appFastModeBtnY = document.createElement('button');
+					appFastModeBtnY.classList.add('alert_fastMode_BtnY');
+					appFastModeBtnY.innerHTML = 'yes';
+					let appFastModeBtnN = document.createElement('button');
+					appFastModeBtnN.classList.add('alert_fastMode_BtnN');
+					appFastModeBtnN.innerHTML = 'no';
 		
+		appFastModeBtns.append(appFastModeBtnY, appFastModeBtnN);
+		appFastMode.append(appFastModeText, appFastModeBtns);
+
 		appItemEat.append(appBtnEatName, appBtnEat);
 		appItemSleep.append(appBtnSleepName, appBtnSleep);			
 		appItemPlay.append(appBtnPlayName, appBtnPlay);
@@ -120,7 +138,7 @@ let AppUI = function() {
 		appScreenTime.append(appScreenTimeContainer);
 
 
-		appScreen.append(appScreenTime, appScreenView, appScreenStatus);
+		appScreen.append(appScreenTime, appScreenView, appScreenStatus, appFastMode);
 
 
 		appTop.append(appTopBtn, appTopBtnName);
@@ -129,6 +147,8 @@ let AppUI = function() {
 		appContainer.append(appTop, appScreen, appBottom);
 
 		appElem.append(appContainer);
+
+		
 
 		return {
 			main: appElem,
@@ -141,7 +161,8 @@ let AppUI = function() {
 			screen: appScreenView,
 			statusLife: appScreenLife,
 			statusFood: appScreenFood,
-			statusSleep: appScreenSleep
+			statusSleep: appScreenSleep,
+			alertFastMode: appFastMode
 		}
 	}
 
@@ -157,6 +178,8 @@ let AppUI = function() {
 		gameOver = false;
 		
 		let data = this.create();
+
+		timerMessage(elems.alertFastMode, 'Do you want to run FAST mode?');
 		
 		elems.petName.innerHTML = data.name;
 		elems.timer.innerHTML = '00:00';
@@ -313,6 +336,16 @@ let AppUI = function() {
 			timerActionWork = false;
 		}, 3000);
 	}
+
+	let timerMessage = (object, text) => {
+		let i = 0;
+		let timer = setInterval(() => {
+			if(i == text.length - 1) clearInterval(timer);
+			object.innerHTML += text[i];
+			i++;
+		  }, 50);
+	}
+	
 
 	let getData = () => { //working all time. Interviews data to get information of Pet parameters
 		timerGet = setInterval(() => {

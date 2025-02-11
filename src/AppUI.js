@@ -218,6 +218,10 @@ let AppUI = function() {
 		clearActive();
 		clearTimeout(timerClear);
 
+		elems.btnEat.removeEventListener('click', onEat);
+		elems.btnSleep.removeEventListener('click', onSleep);
+		elems.btnPlay.removeEventListener('click', onPlay);
+
 		setTimeout(() => { //lifehack, without this nothing is work
 			check = false;
 		}, 1);

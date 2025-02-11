@@ -35,13 +35,14 @@ let AppCore = function() {
 			intervalGiveHealth = 30000;
 		}
 
-		let name = prompt('Please enter pet name...');
-		
+		let name = prompt('Please enter pet name...') || 'Pusheen';
+
 		if (name.length > 10) {
-			name = prompt('Max name length 10 symbols. Please enter pet name...');
-			data.name = name || 'Pusheen';
-		}
-		else data.name = name || 'Pusheen';
+			do {
+				name = prompt('Max name length 10 symbols. Please enter pet name...') || 'Pusheen';
+				data.name = name;
+			} while (name.length > 10)
+		} else data.name = name || 'Pusheen';
 			
 		let dateNow = new Date() //date in RU format
 		let opt = { 

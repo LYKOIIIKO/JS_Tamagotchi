@@ -3,7 +3,8 @@ let AppUI = function() {
 
 	let elems = null,
 		check = false,
-		dataTmp;
+		dataTmp,
+		message = false;
 
 	let timerActionWork = false;
 
@@ -102,24 +103,6 @@ let AppUI = function() {
 					appBtnPlay.classList.add('app__bottom_btn');
 					appBtnPlay.classList.add('app__bottom_btn_play');
 
-			let appFastMode = document.createElement('div');
-			appFastMode.classList.add('alert_fastMode');
-				let appFastModeText = document.createElement('div');
-				appFastModeText.classList.add('alert_fastMode_text');
-				appFastModeText.innerHTML = '';
-
-				let appFastModeBtns = document.createElement('div');
-				appFastModeBtns.classList.add('alert_fastMode_btns');
-					let appFastModeBtnY = document.createElement('button');
-					appFastModeBtnY.classList.add('alert_fastMode_BtnY');
-					appFastModeBtnY.innerHTML = 'yes';
-					let appFastModeBtnN = document.createElement('button');
-					appFastModeBtnN.classList.add('alert_fastMode_BtnN');
-					appFastModeBtnN.innerHTML = 'no';
-		
-		appFastModeBtns.append(appFastModeBtnY, appFastModeBtnN);
-		appFastMode.append(appFastModeText, appFastModeBtns);
-
 		appItemEat.append(appBtnEatName, appBtnEat);
 		appItemSleep.append(appBtnSleepName, appBtnSleep);			
 		appItemPlay.append(appBtnPlayName, appBtnPlay);
@@ -138,7 +121,7 @@ let AppUI = function() {
 		appScreenTime.append(appScreenTimeContainer);
 
 
-		appScreen.append(appScreenTime, appScreenView, appScreenStatus, appFastMode);
+		appScreen.append(appScreenTime, appScreenView, appScreenStatus);
 
 
 		appTop.append(appTopBtn, appTopBtnName);
@@ -159,10 +142,10 @@ let AppUI = function() {
 			petName: appScreenName,
 			timer: appScreenCount,
 			screen: appScreenView,
+			status: appScreenContainer,
 			statusLife: appScreenLife,
 			statusFood: appScreenFood,
-			statusSleep: appScreenSleep,
-			alertFastMode: appFastMode
+			statusSleep: appScreenSleep
 		}
 	}
 
@@ -174,12 +157,21 @@ let AppUI = function() {
 
 		if(check) return;
 
+		if (message) {
+			let item = document.querySelector('.alert');
+			item.remove();
+			message = false;
+			return;
+		}
+
+		messageFastMode();
+	}
+
+	let onStart = (mode, name) => {
 		check = true;
 		gameOver = false;
-		
-		let data = this.create();
 
-		timerMessage(elems.alertFastMode, 'Do you want to run FAST mode?');
+		let data = this.create(mode, name);
 		
 		elems.petName.innerHTML = data.name;
 		elems.timer.innerHTML = '00:00';
@@ -247,6 +239,7 @@ let AppUI = function() {
 
 		setTimeout(() => { //lifehack, without this nothing is work
 			check = false;
+			message = false;
 		}, 1);
 	}
 
@@ -337,13 +330,93 @@ let AppUI = function() {
 		}, 3000);
 	}
 
-	let timerMessage = (object, text) => {
+	let timerMessage = (object, text) => { //animation of text typing
 		let i = 0;
 		let timer = setInterval(() => {
 			if(i == text.length - 1) clearInterval(timer);
 			object.innerHTML += text[i];
 			i++;
 		  }, 50);
+	}
+
+	let messageFastMode = () => {
+		let mode;
+		message = true;
+
+		let appFastMode = document.createElement('div');
+		appFastMode.classList.add('alert_fastMode');
+		appFastMode.classList.add('alert');
+				let appFastModeText = document.createElement('div');
+				appFastModeText.classList.add('alert_fastMode_text');
+				appFastModeText.innerHTML = '';
+
+				let appFastModeBtns = document.createElement('div');
+				appFastModeBtns.classList.add('alert_fastMode_btns');
+					let appFastModeBtnY = document.createElement('button');
+					appFastModeBtnY.classList.add('alert_fastMode_btnY');
+					appFastModeBtnY.innerHTML = 'yes';
+					let appFastModeBtnN = document.createElement('button');
+					appFastModeBtnN.classList.add('alert_fastMode_btnN');
+					appFastModeBtnN.innerHTML = 'no';
+		
+		appFastModeBtns.append(appFastModeBtnY, appFastModeBtnN);
+		appFastMode.append(appFastModeText, appFastModeBtns);
+		elems.screen.append(appFastMode);
+
+		timerMessage(appFastModeText, 'Do you want to run FAST mode?');
+
+		appFastModeBtnY.addEventListener('click', () => {
+			mode = true;
+			messageSetName(mode);
+			appFastMode.remove();
+		})
+
+		appFastModeBtnN.addEventListener('click', () => {
+			mode = false;
+			messageSetName(mode);
+			appFastMode.remove();
+		})
+	}
+
+	let messageSetName = (mode) => {
+		let name;
+
+		let appSetName = document.createElement('div');
+		appSetName.classList.add('alert_setName');
+		appSetName.classList.add('alert');
+				let appSetNameText = document.createElement('div');
+				appSetNameText.classList.add('alert_setName_text');
+				appSetNameText.innerHTML = '';
+
+				let appSetNameInput = document.createElement('input');
+				appSetNameInput.classList.add('alert_setName_input');
+				appSetNameInput.setAttribute('autofocus', '');
+				appSetNameInput.setAttribute('title', 'Max name length 10 symbols')
+
+				let appSetNameBtn = document.createElement('button');
+				appSetNameBtn.classList.add('alert_setName_btn');
+				appSetNameBtn.innerHTML = 'ok';
+					
+		
+		
+		appSetName.append(appSetNameText, appSetNameInput, appSetNameBtn);
+		elems.screen.append(appSetName);
+
+		timerMessage(appSetNameText, "Please enter the pet's name...");
+
+		appSetNameBtn.addEventListener('click', () => {
+			name = appSetNameInput.value;
+
+			if (name.length > 10) {
+				appSetNameInput.value = '';
+				appSetNameText.innerHTML = '';
+				timerMessage(appSetNameText, "Max name length 10 symbols.");
+				return;
+			}
+
+			onStart(mode, name);
+			appSetName.remove();
+		})
 	}
 	
 

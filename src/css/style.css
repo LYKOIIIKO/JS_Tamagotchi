@@ -13,7 +13,7 @@ html, body, #root, .app {
     height: 100%;
 }
 
-span, div {
+span, div, button, input {
     font-family: "Lilita One", serif;
 	font-weight: 400;
 	font-style: normal; 
@@ -246,9 +246,45 @@ ul {
 }
 
 
-.alert_fastMode {
-	/* display: none; */
+
+.alert {
+	padding: 10px;
+	text-align: center;
+}
+
+.alert_fastMode_btns {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 60%;
+	left: 30%; 
+
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+}
+
+.alert_setName_btn {
+	position: absolute;
+	top: 60%;
+	left: 43%; 
+}
+
+.alert_fastMode_btnY,
+.alert_fastMode_btnN,
+.alert_setName_btn {
+	background: transparent;
+	border: none;
+
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.alert_setName_input {
+	position: absolute;
+	top: 40%;
+	left: 15px; 
+
+	border: none;
+	background-color: rgba(255, 255, 255, 0.299);
+	padding: 5px;
+	font-size: 18px;
 }

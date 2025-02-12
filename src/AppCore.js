@@ -14,35 +14,27 @@ let AppCore = function() {
 		intervalPickUpHealth = 60000,
 		intervalGiveHealth = 30000;
 
-	this.create = () => {
+	this.create = (mode, name) => {
 		timerHealthWork = false,
 		timerGiveHealthWork = false,
 		gameOver = false;
 
-		//this.confirm = confirm('Do you want to run FAST mode?');
+		if (mode) { //FAST mode intervals
+			intervalFood = 3000,
+			intervalHealth = 5000,
+			intervalSleep = 5000,
+			intervalPickUpHealth = 10000,
+			intervalGiveHealth = 1000;
+		}
+		else {
+			intervalFood = 60000, //basic intervals
+			intervalSleep = 60000,
+			intervalPickUpHealth = 60000,
+			intervalGiveHealth = 30000;
+		}
+		
 
-		// if (this.confirm) { //FAST mode intervals
-		// 	intervalFood = 3000,
-		// 	intervalHealth = 5000,
-		// 	intervalSleep = 5000,
-		// 	intervalPickUpHealth = 10000,
-		// 	intervalGiveHealth = 1000;
-		// }
-		// else {
-		// 	intervalFood = 60000, //basic intervals
-		// 	intervalSleep = 60000,
-		// 	intervalPickUpHealth = 60000,
-		// 	intervalGiveHealth = 30000;
-		// }
-
-		let name = prompt('Please enter pet name...') || 'Pusheen';
-
-		if (name.length > 10) {
-			do {
-				name = prompt('Max name length 10 symbols. Please enter pet name...') || 'Pusheen';
-				data.name = name;
-			} while (name.length > 10)
-		} else data.name = name || 'Pusheen';
+		data.name = name || 'Pusheen';
 			
 		let dateNow = new Date() //date in RU format
 		let opt = { 

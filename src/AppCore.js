@@ -188,7 +188,6 @@ let AppCore = function() {
 
 		data = {};
 		timerHealthWork = false;
-		alert('Stop game');
 	}
 
 	this.gameOver = () => {

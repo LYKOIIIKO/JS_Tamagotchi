@@ -103,6 +103,20 @@ let AppUI = function() {
 					appBtnPlay.classList.add('app__bottom_btn');
 					appBtnPlay.classList.add('app__bottom_btn_play');
 
+
+		let music = document.createElement('audio');
+		music.setAttribute('controls', 'true');
+		music.setAttribute('src', '/../assets/sounds/bg_music.mp3');
+		music.setAttribute('autoplay', 'true');
+		music.setAttribute('loop', 'true');
+		music.volume = '0.005';
+		let musicBtn = document.createElement('button');
+		musicBtn.innerHTML = '5'
+		musicBtn.addEventListener('click', () => {
+			music.pause = true;
+			console.dir(music)
+		})
+
 		appItemEat.append(appBtnEatName, appBtnEat);
 		appItemSleep.append(appBtnSleepName, appBtnSleep);			
 		appItemPlay.append(appBtnPlayName, appBtnPlay);
@@ -129,7 +143,8 @@ let AppUI = function() {
 
 		appContainer.append(appTop, appScreen, appBottom);
 
-		appElem.append(appContainer);
+		appElem.append(appContainer, music, musicBtn);
+		console.dir(music);
 
 		
 
@@ -157,7 +172,7 @@ let AppUI = function() {
 
 		if(check) return;
 
-		if (message) {
+		if (message) { //off tamagotchi when message is on screen and btn pressed
 			let item = document.querySelector('.alert');
 			item.remove();
 			message = false;
@@ -397,8 +412,6 @@ let AppUI = function() {
 				appSetNameBtn.classList.add('alert_setName_btn');
 				appSetNameBtn.innerHTML = 'ok';
 					
-		
-		
 		appSetName.append(appSetNameText, appSetNameInput, appSetNameBtn);
 		elems.screen.append(appSetName);
 

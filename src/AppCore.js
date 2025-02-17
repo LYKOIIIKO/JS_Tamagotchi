@@ -199,7 +199,5 @@ let AppCore = function() {
 		clearInterval(timerSleep);
 		clearInterval(timerGiveHealth);
 		clearInterval(timerCount);
-
-		alert('Game Over!');
 	}
 }

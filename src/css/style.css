@@ -53,6 +53,12 @@ ul {
 	top: 10%;
 	left: 44%;
 	display: flex;
+	gap: 45px;
+	align-items: flex-end;
+}
+
+.app__top_container {
+	display: flex;
 	flex-direction: column-reverse;
 	justify-content: center;
 	align-items: center;
@@ -75,6 +81,26 @@ ul {
 
 .app__top_btn:hover {
 	background-image: url(/assets/images/ico_bottom_btn_push.png);
+}
+
+.app__top_musicBtn {
+	background-image: url(/assets/images/ico_sound_on.png);
+	width: 32px;
+	height: 32px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.app__top_musicBtn:hover {
+	background-image: url(/assets/images/ico_sound_off.png);
+}
+.app__top_musicBtn.muted {
+	background-image: url(/assets/images/ico_sound_off.png);
+}
+
+.app__top_musicBtn.muted:hover {
+	background-image: url(/assets/images/ico_sound_on.png);
 }
 
 .app__screen {

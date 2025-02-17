@@ -21,12 +21,18 @@ let AppUI = function() {
 
 		let appTop = document.createElement('div');
 		appTop.classList.add('app__top');
-			let appTopBtn = document.createElement('button');
-			appTopBtn.classList.add('app__top_btn');
+			let appTopContainer = document.createElement('div');
+			appTopContainer.classList.add('app__top_container');
+				let appTopBtn = document.createElement('button');
+				appTopBtn.classList.add('app__top_btn');
 
-			let appTopBtnName = document.createElement('span');
-			appTopBtnName.classList.add('app__top_btnName');
-			appTopBtnName.innerHTML = 'on/off';
+				let appTopBtnName = document.createElement('span');
+				appTopBtnName.classList.add('app__top_btnName');
+				appTopBtnName.innerHTML = 'on/off';
+			
+			let appMusicBtn = document.createElement('button');
+			appMusicBtn.classList.add('app__top_musicBtn');
+			appMusicBtn.classList.add('muted');
 
 		let appScreen = document.createElement('div');
 		appScreen.classList.add('app__screen');
@@ -104,18 +110,12 @@ let AppUI = function() {
 					appBtnPlay.classList.add('app__bottom_btn_play');
 
 
-		let music = document.createElement('audio');
-		music.setAttribute('controls', 'true');
-		music.setAttribute('src', '/../assets/sounds/bg_music.mp3');
-		music.setAttribute('autoplay', 'true');
-		music.setAttribute('loop', 'true');
-		music.volume = '0.005';
-		let musicBtn = document.createElement('button');
-		musicBtn.innerHTML = '5'
-		musicBtn.addEventListener('click', () => {
-			music.pause = true;
-			console.dir(music)
-		})
+		let appMusic = document.createElement('audio');
+		appMusic.setAttribute('src', '/../assets/sounds/bg_music.mp3');
+		appMusic.setAttribute('loop', 'true');
+		appMusic.volume = '0.005';
+		
+		
 
 		appItemEat.append(appBtnEatName, appBtnEat);
 		appItemSleep.append(appBtnSleepName, appBtnSleep);			
@@ -137,16 +137,24 @@ let AppUI = function() {
 
 		appScreen.append(appScreenTime, appScreenView, appScreenStatus);
 
-
-		appTop.append(appTopBtn, appTopBtnName);
+		appTopContainer.append(appTopBtn, appTopBtnName);
+		appTop.append(appTopContainer, appMusicBtn);
 
 
 		appContainer.append(appTop, appScreen, appBottom);
 
-		appElem.append(appContainer, music, musicBtn);
-		console.dir(music);
+		appElem.append(appContainer);	
 
-		
+		appMusicBtn.addEventListener('click', () => {
+			if (appMusic.paused){
+				appMusicBtn.classList.remove('muted');
+				appMusic.play();
+			} 
+			else {
+				appMusicBtn.classList.add('muted');
+				appMusic.pause();
+			} 
+		})
 
 		return {
 			main: appElem,
@@ -160,11 +168,22 @@ let AppUI = function() {
 			status: appScreenContainer,
 			statusLife: appScreenLife,
 			statusFood: appScreenFood,
-			statusSleep: appScreenSleep
+			statusSleep: appScreenSleep,
+			music:appMusic,
+			musicBtn:appMusicBtn
 		}
 	}
 
 	let onEnable = () => { //when press button on/off
+		
+		if (elems.music.paused && !message){
+			elems.musicBtn.classList.remove('muted');
+			elems.music.play();
+		} else if(!elems.music.paused && message) {
+			elems.musicBtn.classList.add('muted');
+			elems.music.pause();
+		} 
+
 		if (check) { //stop game if it works
 			this.stop();
 			clear();

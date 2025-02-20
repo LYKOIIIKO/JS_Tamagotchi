@@ -70,15 +70,37 @@ let AppUI = function() {
 
 			let appScreenStatus = document.createElement('div');
 			appScreenStatus.classList.add('app__screen_status');
-			appScreenStatus.innerHTML = '&#8203;';
 				let appScreenContainer = document.createElement('div');
 				appScreenContainer.classList.add('app__screen_container');
-					let appScreenLife = document.createElement('span');
-					appScreenLife.classList.add('app__screen_life');
-					let appScreenFood = document.createElement('span');
+					let appScreenLifeList = document.createElement('ul');
+					appScreenLifeList.classList.add('app__screen_life_list');
+						let appScreenLifeItem1 = document.createElement('li');
+						appScreenLifeItem1.classList.add('app__screen_life_item');
+						
+						let appScreenLifeItem2 = document.createElement('li');
+						appScreenLifeItem2.classList.add('app__screen_life_item');
+						
+						let appScreenLifeItem3 = document.createElement('li');
+						appScreenLifeItem3.classList.add('app__screen_life_item');
+						
+						let appScreenLifeItem4 = document.createElement('li');
+						appScreenLifeItem4.classList.add('app__screen_life_item');
+						
+						let appScreenLifeItem5 = document.createElement('li');
+						appScreenLifeItem5.classList.add('app__screen_life_item');
+						
+					let appScreenFood = document.createElement('div');
 					appScreenFood.classList.add('app__screen_food');
-					let appScreenSleep = document.createElement('span');
+						let appScreenFoodBar = document.createElement('div');
+						appScreenFoodBar.classList.add('app__screen_food_bar');
+
+					let appScreenSleep = document.createElement('div');
 					appScreenSleep.classList.add('app__screen_sleep');
+						let appScreenSleepBar = document.createElement('div');
+						appScreenSleepBar.classList.add('app__screen_sleep_bar');
+					
+					// let appScreenSleep = document.createElement('span');
+					// appScreenSleep.classList.add('app__screen_sleep');
 
 		let appBottom = document.createElement('div');
 		appBottom.classList.add('app__bottom');
@@ -125,8 +147,10 @@ let AppUI = function() {
 
 		appBottom.append(appList)
 
-
-		appScreenContainer.append(appScreenLife, appScreenFood, appScreenSleep);
+		appScreenLifeList.append(appScreenLifeItem1, appScreenLifeItem2, appScreenLifeItem3, appScreenLifeItem4, appScreenLifeItem5);
+		appScreenFood.append(appScreenFoodBar);
+		appScreenSleep.append(appScreenSleepBar);
+		appScreenContainer.append(appScreenLifeList, appScreenFood, appScreenSleep);
 		appScreenStatus.append(appScreenContainer);
 
 		appScreenView.append(appScreenGifBorn, appScreenGifDeath, appScreenGifEat, appScreenGifHealthLess, appScreenGifNeedEat, appScreenGifNeedSleep, appScreenGifPlay, appScreenGifSleep, appScreenGifWalk);
@@ -166,7 +190,7 @@ let AppUI = function() {
 			timer: appScreenCount,
 			screen: appScreenView,
 			status: appScreenContainer,
-			statusLife: appScreenLife,
+			statusLife: appScreenLifeList,
 			statusFood: appScreenFood,
 			statusSleep: appScreenSleep,
 			music:appMusic,
@@ -175,7 +199,7 @@ let AppUI = function() {
 	}
 
 	let onEnable = () => { //when press button on/off
-		
+
 		if (elems.music.paused && !message){
 			elems.musicBtn.classList.remove('muted');
 			elems.music.play();
@@ -209,9 +233,20 @@ let AppUI = function() {
 		
 		elems.petName.innerHTML = data.name;
 		elems.timer.innerHTML = '00:00';
-		elems.statusLife.innerHTML = `life ${data.health}/${data.healthMax}`;
-		elems.statusFood.innerHTML = `food ${data.food}/${data.foodMax}`;
-		elems.statusSleep.innerHTML = `sleep ${data.sleep}/${data.sleepMax}`;
+
+		//elems.statusLife.innerHTML = `life ${data.health}/${data.healthMax}`;
+		elems.statusLife.childNodes[0].innerHTML = '<svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" fill="#e32636"/></svg>';
+		elems.statusLife.childNodes[1].innerHTML = '<svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" fill="#e32636"/></svg>';
+		elems.statusLife.childNodes[2].innerHTML = '<svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" fill="#e32636"/></svg>';
+		elems.statusLife.childNodes[3].innerHTML = '<svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" fill="#e32636"/></svg>';
+		elems.statusLife.childNodes[4].innerHTML = '<svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.24264 8.24264L8 15L14.7574 8.24264C15.553 7.44699 16 6.36786 16 5.24264V5.05234C16 2.8143 14.1857 1 11.9477 1C10.7166 1 9.55233 1.55959 8.78331 2.52086L8 3.5L7.21669 2.52086C6.44767 1.55959 5.28338 1 4.05234 1C1.8143 1 0 2.8143 0 5.05234V5.24264C0 6.36786 0.44699 7.44699 1.24264 8.24264Z" fill="#e32636"/></svg>';
+	
+		elems.statusFood.style.display = 'block';
+		elems.statusFood.childNodes[0].style.width = '100%';
+
+		elems.statusSleep.style.display = 'block';
+		elems.statusSleep.childNodes[0].style.width = '100%';
+		
 
 		bornActive();
 
@@ -220,8 +255,8 @@ let AppUI = function() {
 		
 
 		this.timerLive(elems.timer);
-		this.pickUpFood(elems.statusFood, elems.statusLife);
-		this.pickUpSleep(elems.statusSleep, elems.statusLife);
+		this.pickUpFood(elems.statusFood.childNodes[0], elems.statusLife);
+		this.pickUpSleep(elems.statusSleep.childNodes[0], elems.statusLife);
 		this.giveHealth(elems.statusLife);
 
 		getData();
@@ -234,14 +269,14 @@ let AppUI = function() {
 	let onEat = () => { //when press button eat
 		if (gameOver) return;
 		
-		this.giveFood(elems.statusFood);
+		this.giveFood(elems.statusFood.childNodes[0], elems.statusLife);
 		eatingActive();
 	}
 
 	let onSleep = () => { //when press button sleep
 		if (gameOver) return;
 
-		this.giveSleep(elems.statusSleep);
+		this.giveSleep(elems.statusSleep.childNodes[0], elems.statusLife);
 		sleepingActive();
 	}
 
@@ -260,9 +295,14 @@ let AppUI = function() {
 	let clear = () => { //clear screen when game stop
 		elems.petName.innerHTML = '';
 		elems.timer.innerHTML = '';
-		elems.statusLife.innerHTML = '';
-		elems.statusFood.innerHTML = '';
-		elems.statusSleep.innerHTML = '';
+		elems.statusLife.childNodes[0].innerHTML = '';
+		elems.statusLife.childNodes[1].innerHTML = '';
+		elems.statusLife.childNodes[2].innerHTML = '';
+		elems.statusLife.childNodes[3].innerHTML = '';
+		elems.statusLife.childNodes[4].innerHTML = '';
+		
+		elems.statusFood.style.display = 'none';
+		elems.statusSleep.style.display = 'none';
 
 		clearActive();
 		clearTimeout(timerClear);
@@ -410,6 +450,7 @@ let AppUI = function() {
 			messageSetName(mode);
 			appFastMode.remove();
 		})
+		
 	}
 
 	let messageSetName = (mode) => {
@@ -448,6 +489,23 @@ let AppUI = function() {
 
 			onStart(mode, name);
 			appSetName.remove();
+		})
+
+		appSetNameInput.addEventListener('keypress', (event) => {
+			if(event.key == 'Enter') {
+				name = appSetNameInput.value;
+
+				if (name.length > 10) {
+					appSetNameInput.value = '';
+					appSetNameText.innerHTML = '';
+					timerMessage(appSetNameText, "Max name length 10 symbols.");
+					return;
+				}
+
+				onStart(mode, name);
+				appSetName.remove();
+			}
+			
 		})
 	}
 	

@@ -76,6 +76,8 @@ ul {
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
+	box-shadow: 0 3px #444;
+	border-radius: 50%;
 }
 
 .app__top_btnName {
@@ -93,6 +95,8 @@ ul {
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
+	box-shadow: 0 3px #444;
+	border-radius: 50%;
 }
 
 .app__top_musicBtn:hover {
@@ -104,6 +108,12 @@ ul {
 
 .app__top_musicBtn.muted:hover {
 	background-image: url(/assets/images/ico_sound_on.png);
+}
+
+.app__top_btn:active,
+.app__top_musicBtn:active {
+	box-shadow: 0 1px #333;
+	transform: translateY(2px);
 }
 
 .app__screen {
@@ -133,7 +143,7 @@ ul {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 200px;
+	width: 80%;
 }
 
 .app__screen_name,
@@ -217,29 +227,49 @@ ul {
 }
 
 .app__screen_container {
-	position: relative;
 	width: 100%;
 	display: flex;
-	justify-content: space-evenly;
+	align-items: center;
+	gap: 10px;
+	padding: 0 5px;
 }
 
-.app__screen_life,
 .app__screen_food,
 .app__screen_sleep {
+	display: none;
+	width: 100%;
+	background-color: grey;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+	
+	border-radius: 5px;
+}
+
+.app__screen_food::before {
+	content: 'food';
 	position: absolute;
-	font-size: 18px;
+	margin-left: 5px;
 }
 
-.app__screen_life {
-	left: 5%;
+.app__screen_food_bar,
+.app__screen_sleep_bar {
+	background-color: green;
+	height: 20px;
+	border-radius: 5px;
+	transition: 1s ease;
 }
 
-.app__screen_food {
-	left: 35%;
+.app__screen_sleep::before {
+	content: 'sleep';
+	position: absolute;
+	margin-left: 5px;
 }
 
-.app__screen_sleep {
-	left: 68%;
+.app__screen_life_list {
+	display: flex;
+	flex-direction: row;
+	gap: 3px;
 }
 
 .app__bottom {
@@ -271,12 +301,18 @@ ul {
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
+	box-shadow: 0 3px #333;
+	border-radius: 50%;
 }
 
 .app__bottom_btn:hover{
 	background-image: url(/assets/images/ico_bottom_btn_push.png);
 }
 
+.app__bottom_btn:active{
+	box-shadow: 0 1px #333;
+	transform: translateY(2px);
+}
 
 
 .alert {

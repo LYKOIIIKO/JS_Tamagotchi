@@ -133,7 +133,7 @@ let AppUI = function() {
 
 
 		let appMusic = document.createElement('audio');
-		appMusic.setAttribute('src', '../assets/sounds/bg_music.mp3');
+		appMusic.setAttribute('src', 'assets/sounds/bg_music.mp3');
 		appMusic.setAttribute('loop', 'true');
 		appMusic.volume = '0.005';
 		

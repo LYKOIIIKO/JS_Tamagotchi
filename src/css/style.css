@@ -29,7 +29,7 @@ body {
 }
 
 .app {
-	background-image: url(/assets/images/bg_app.png);
+	background-image: url(assets/images/bg_app.png);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px 0;
@@ -42,7 +42,7 @@ ul {
 
 .container {
 	position: relative;
-	background-image: url(/assets/images/bg__container.png);
+	background-image: url(assets/images/bg__container.png);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -68,7 +68,7 @@ ul {
 }
 
 .app__top_btn {
-	background-image: url(/assets/images/ico_bottom_btn.png);
+	background-image: url(assets/images/ico_bottom_btn.png);
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 32px;
@@ -85,11 +85,11 @@ ul {
 }
 
 .app__top_btn:hover {
-	background-image: url(/assets/images/ico_bottom_btn_push.png);
+	background-image: url(assets/images/ico_bottom_btn_push.png);
 }
 
 .app__top_musicBtn {
-	background-image: url(/assets/images/ico_sound_on.png);
+	background-image: url(assets/images/ico_sound_on.png);
 	width: 32px;
 	height: 32px;
 	border: none;
@@ -100,14 +100,14 @@ ul {
 }
 
 .app__top_musicBtn:hover {
-	background-image: url(/assets/images/ico_sound_off.png);
+	background-image: url(assets/images/ico_sound_off.png);
 }
 .app__top_musicBtn.muted {
-	background-image: url(/assets/images/ico_sound_off.png);
+	background-image: url(assets/images/ico_sound_off.png);
 }
 
 .app__top_musicBtn.muted:hover {
-	background-image: url(/assets/images/ico_sound_on.png);
+	background-image: url(assets/images/ico_sound_on.png);
 }
 
 .app__top_btn:active,
@@ -120,7 +120,7 @@ ul {
 	position: absolute;
 	top: 22%;
 	left: 25%;
-	background-image: url(/assets/images/bg_screen.png);
+	background-image: url(assets/images/bg_screen.png);
 	background-repeat: no-repeat;
 	background-color: rgba(255, 255, 255, 0.514);
 
@@ -186,39 +186,39 @@ ul {
 }
 
 .app__screen_gifBorn {
-	background-image: url(/assets/images/pet_born.gif);
+	background-image: url(assets/images/pet_born.gif);
 }
 
 .app__screen_gifDeath {
-	background-image: url(/assets/images/pet_death.gif);
+	background-image: url(assets/images/pet_death.gif);
 }
 
 .app__screen_gifEat {
-	background-image: url(/assets/images/pet_eat.gif);
+	background-image: url(assets/images/pet_eat.gif);
 }
 
 .app__screen_gifHealthLess {
-	background-image: url(/assets/images/pet_healthLess2.gif);
+	background-image: url(assets/images/pet_healthLess2.gif);
 }
 
 .app__screen_gifNeedEat {
-	background-image: url(/assets/images/pet_needEat.gif);
+	background-image: url(assets/images/pet_needEat.gif);
 }
 
 .app__screen_gifNeedSleep {
-	background-image: url(/assets/images/pet_needSleep.gif);
+	background-image: url(assets/images/pet_needSleep.gif);
 }
 
 .app__screen_gifPlay {
-	background-image: url(/assets/images/pet_play.gif);
+	background-image: url(assets/images/pet_play.gif);
 }
 
 .app__screen_gifSleep {
-	background-image: url(/assets/images/pet_sleep.gif);
+	background-image: url(assets/images/pet_sleep.gif);
 }
 
 .app__screen_gifWalk{
-	background-image: url(/assets/images/pet_walk.gif);
+	background-image: url(assets/images/pet_walk.gif);
 }
 
 .app__screen_status {
@@ -293,7 +293,7 @@ ul {
 }
 
 .app__bottom_btn {
-	background-image: url(/assets/images/ico_bottom_btn.png);
+	background-image: url(assets/images/ico_bottom_btn.png);
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 40px;
@@ -306,7 +306,7 @@ ul {
 }
 
 .app__bottom_btn:hover{
-	background-image: url(/assets/images/ico_bottom_btn_push.png);
+	background-image: url(assets/images/ico_bottom_btn_push.png);
 }
 
 .app__bottom_btn:active{

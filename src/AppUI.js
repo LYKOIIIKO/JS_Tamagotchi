@@ -99,8 +99,6 @@ let AppUI = function() {
 						let appScreenSleepBar = document.createElement('div');
 						appScreenSleepBar.classList.add('app__screen_sleep_bar');
 					
-					// let appScreenSleep = document.createElement('span');
-					// appScreenSleep.classList.add('app__screen_sleep');
 
 		let appBottom = document.createElement('div');
 		appBottom.classList.add('app__bottom');
@@ -137,8 +135,6 @@ let AppUI = function() {
 		appMusic.setAttribute('loop', 'true');
 		appMusic.volume = '0.005';
 		
-		
-
 		appItemEat.append(appBtnEatName, appBtnEat);
 		appItemSleep.append(appBtnSleepName, appBtnSleep);			
 		appItemPlay.append(appBtnPlayName, appBtnPlay);
@@ -247,7 +243,6 @@ let AppUI = function() {
 		elems.statusSleep.style.display = 'block';
 		elems.statusSleep.childNodes[0].style.width = '100%';
 		
-
 		bornActive();
 
 		if(timerActionWork) clearTimeout(timerClear);
@@ -450,7 +445,6 @@ let AppUI = function() {
 			messageSetName(mode);
 			appFastMode.remove();
 		})
-		
 	}
 
 	let messageSetName = (mode) => {
@@ -505,7 +499,6 @@ let AppUI = function() {
 				onStart(mode, name);
 				appSetName.remove();
 			}
-			
 		})
 	}
 	
